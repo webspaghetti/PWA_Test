@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "workbox-cli": "^7.0.0"
+  },
+  "devDependencies": {
+    "workbox-sw": "^7.0.0"
+  }
+}

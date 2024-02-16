@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PWA Test</title>
+
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+    <h1>Hallo</h1>
+
+    <button id="installButton" style="display: none;">Install App</button>
+
+    <script>
+        if ('serviceWorker' in navigator){
+            navigator.serviceWorker.register('/service-worker.js')
+        }
+
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (event) => {
+            // Prevent the default behavior
+            event.preventDefault();
+
+            // Stash the event so it can be triggered later.
+            deferredPrompt = event;
+
+            // Show the install button
+            document.getElementById('installButton').style.display = 'block';
+
+            // Optionally, you can do more UI enhancements here
+        });
+
+        // Add click event listener to the install button
+        document.getElementById('installButton').addEventListener('click', () => {
+            // Show the installation prompt
+            deferredPrompt.prompt();
+
+            // Wait for the user to respond to the prompt
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted the install prompt');
+                    // Optionally, you can track installation success here
+                } else {
+                    console.log('User dismissed the install prompt');
+                    // Optionally, you can track installation dismissal here
+                }
+
+                // Reset the deferredPrompt variable
+                deferredPrompt = null;
+            });
+        });
+
+    </script>
+
+</body>
+</html>
