@@ -1,7 +1,7 @@
 {
   "name": "Pwa-Test",
   "short_name": "PWA",
-  "start_url": "/?home=true",
+  "start_url": "PWA_Test",
   "icons": [
     {
       "src": "icons/manifest-icon-192.maskable.png",
